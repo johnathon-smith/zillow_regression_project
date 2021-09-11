@@ -15,8 +15,8 @@
 #### Deliverables
 * A five minute verbal presentation supported with slides.
 * A Github Repository containing:
-    1) A clearly labeled final report jupyter notebook.
-    2) The .py files necessary to reproduce my work for anyone with their own env.py file.
+    - A clearly labeled final report jupyter notebook.
+    - The .py files necessary to reproduce my work for anyone with their own env.py file.
 * Finally, a README.md file documenting my project planning with instructions on how someone could clone and reproduce my project on their own machine. Goals for the project, a data dictionary, and key findings and takeaways should be included.
 
 #### Context
@@ -40,21 +40,24 @@
 #### Initial Hypotheses
 
 __Hypothesis 1__
-H_0: bedroom_count is not linearly correlated with tax_value
-H_a: bedroom_count is linearly correlated with tax_value
-alpha = 0.05
+* H_0: bedroom_count is not linearly correlated with tax_value
+* H_a: bedroom_count is linearly correlated with tax_value
+* alpha = 0.05
+
 Outcome: To be determined
 
 __Hypothesis 2__
-H_0: bathroom_count is not linearly correlated with tax_value
-H_a: bathroom_count is linearly correlated with tax_value
-alpha = 0.05
+* H_0: bathroom_count is not linearly correlated with tax_value
+* H_a: bathroom_count is linearly correlated with tax_value
+* alpha = 0.05
+
 Outcome: To be determined
 
 __Hypothesis 3__
-H_0: home_area is not linearly correlated with tax_value
-H_a: home_area is linearly correlated with tax_value
-alpha = 0.05
+* H_0: home_area is not linearly correlated with tax_value
+* H_a: home_area is linearly correlated with tax_value
+* alpha = 0.05
+
 Outcome: To be determined
 
 ***
