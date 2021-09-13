@@ -33,7 +33,7 @@ def plot_categorical_and_continuous_vars(df, cat_cols, num_cols):
 
 
 #The following function will compare p to the established alpha value, and print whether the nully hypothesis was rejected or not.
-def is_significant(p):
+def is_significant(p, alpha):
     if p < alpha:
         print('p is less than alpha, so we reject the null hypothesis.')
     else:
