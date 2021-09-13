@@ -124,7 +124,7 @@ def train_validate_test_split(df, seed = 123):
     '''
 
     #Drop unnecessary columns before splitting
-    df.drop(columns = ['tax_amount', 'state', 'county', 'county_tax_rate'], inplace = True)
+    df.drop(columns = ['tax_amount', 'state', 'county_tax_rate'], inplace = True)
 
     train_validate, test = train_test_split(df, test_size=0.2, 
                                             random_state=seed)
