@@ -241,11 +241,10 @@ def get_polynomial_model(X_train_scaled, X_validate_scaled, X_test_scaled, y_tra
 #The following function will plot the predictions of my best model.
 def plot_predictions(y_test):
     plt.figure(figsize = (16, 8))
-    plt.plot(y_test.tax_value, y_test.tax_value, color = 'green')
-    plt.plot(y_test.tax_value, y_test['baseline_mean_pred'], color = 'red')
+    plt.plot(y_test.tax_value, y_test.tax_value, color = 'green', label = 'Ideal: Actual Tax Value')
+    plt.plot(y_test.tax_value, y_test['baseline_mean_pred'], color = 'red', label = 'Baseline: Mean Tax Value')
     plt.scatter(y_test.tax_value, y_test['poly_preds_3'], alpha = 0.5)
-    plt.annotate('Ideal: Actual Tax Value', (1.0*10**6, 1.05*10**6), rotation = 25)
-    plt.annotate('Baseline: Mean Tax Value', (1.15*10**6, .3*10**6), color = 'red')
+    plt.legend()
     plt.title('My Best Model: Predictions')
     plt.xlabel('Actual Tax Value')
     plt.ylabel('Predicted Tax Value')
