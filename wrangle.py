@@ -50,8 +50,7 @@ def wrangle_zillow():
     LEFT JOIN predictions_2017 ON predictions_2017.parcelid = properties_2017.parcelid
     LEFT JOIN heatingorsystemtype ON heatingorsystemtype.heatingorsystemtypeid = properties_2017.heatingorsystemtypeid
     LEFT JOIN propertylandusetype ON propertylandusetype.propertylandusetypeid = properties_2017.propertylandusetypeid
-    WHERE (properties_2017.propertylandusetypeid = 261
-        OR properties_2017.propertylandusetypeid = 279)
+    WHERE (properties_2017.propertylandusetypeid IN (261, 262, 263, 264, 265, 266, 268, 273, 275, 276, 279))
         AND (predictions_2017.transactiondate >= '2017-05-01'
             AND predictions_2017.transactiondate <= '2017-08-31');
     """
@@ -64,25 +63,33 @@ def wrangle_zillow():
 
     #Begin preparing
     #Select only the needed columns
-    zillow = zillow[['bedroomcnt', 'bathroomcnt', 'calculatedfinishedsquarefeet', 'fips', 'taxvaluedollarcnt', 'taxamount']]
+    zillow = zillow[['bedroomcnt', 'bathroomcnt', 'calculatedfinishedsquarefeet', 'fips', 'latitude', 'longitude', 'yearbuilt', 'taxvaluedollarcnt', 'taxamount']]
 
     #rename the columns to be more understandable and easier to read
     zillow.rename(columns = {'bedroomcnt':'bedroom_count',
-                    'bathroomcnt':'bathroom_count',
-                    'calculatedfinishedsquarefeet':'home_area',
-                    'taxvaluedollarcnt':'tax_value',
-                    'taxamount':'tax_amount'}, inplace = True)
+                'bathroomcnt':'bathroom_count',
+                'calculatedfinishedsquarefeet':'home_area',
+                'taxvaluedollarcnt':'tax_value',
+                'taxamount':'tax_amount',
+                'yearbuilt':'year_built',}, inplace = True)
 
     #Fill missing 'home_area' values with 'home_area' median
     zillow.home_area = zillow.home_area.fillna(zillow.home_area.median())
 
+    #Fill missing 'year_built' values with the mode, 1955
+    zillow.year_built.fillna(1955, inplace = True)
+
     #Remove other na values
     zillow = zillow.dropna()
 
-    #Now convert bedroom_count, home_area, and tax_value to ints
+    #Remove duplicates
+    zillow = zillow.drop_duplicates()
+
+    #Now convert bedroom_count, home_area, tax_value, and year_built to ints
     zillow.bedroom_count = zillow.bedroom_count.astype(int)
     zillow.home_area = zillow.home_area.astype(int)
     zillow.tax_value = zillow.tax_value.astype(int)
+    zillow.year_built = zillow.year_built.astype(int)
 
     #Convert 'fips' to a string since it is categorical.
     zillow.fips = zillow.fips.astype(int)
@@ -100,6 +107,7 @@ def wrangle_zillow():
 
     #Now remove things that don't make sense and/or are impossible/illegal.
     #If something doesn't sound like the average 'single family residential' property, drop it.
+    zillow = zillow[zillow.year_built >= 1900]
     zillow = zillow[(zillow.bedroom_count > 0) & (zillow.bathroom_count> 0)]
     zillow = zillow[zillow.bedroom_count <= 5]
     zillow = zillow[zillow.bathroom_count <= 3]
