@@ -33,6 +33,9 @@
 | bathroom_count | float | The number of bathrooms in the property (Includes values for half baths and other combinations) |
 | home_area | int | The area of the property in square feet |
 | county | str | The name of the county the property resides in |
+| latitude | float | The latitude of the property |
+| longitude | float | The longitude of the property |
+| year_built | int | The year the property was constructed |
 | tax_amount | float | The amount of tax paid (Used to calculate county_tax_rate) |
 | state | str | The name of the state the property resides in |
 | county_tax_rate | float | The tax rate applied to the property (Calculated using tax_amount and tax_value) |
@@ -40,25 +43,32 @@
 #### Initial Hypotheses
 
 __Hypothesis 1__
-* H_0: bedroom_count is not linearly correlated with tax_value
-* H_a: bedroom_count is linearly correlated with tax_value
+* $H_0$: home_area is not linearly correlated with tax_value.
+* $H_a$: home_area is linearly correlated with tax_value.
 * alpha = 0.05
 
-Outcome: To be determined
+Outcome: Rejected the Null Hypothesis.
 
 __Hypothesis 2__
-* H_0: bathroom_count is not linearly correlated with tax_value
-* H_a: bathroom_count is linearly correlated with tax_value
+* $H_0$: The average tax_value of Orange County properties is <= The average tax_value of Ventura County properties.
+* $H_a$: The average tax_value of Orange County properties is > The average tax_value of  Ventura County properties.
 * alpha = 0.05
 
-Outcome: To be determined
+Outcome: Rejected the Null Hypothesis.
 
 __Hypothesis 3__
-* H_0: home_area is not linearly correlated with tax_value
-* H_a: home_area is linearly correlated with tax_value
+* $H_0$: The average tax_value of Ventura County properties is <= The average tax_value of Los Angelas County properties.
+* $H_a$: The average tax_value of Ventura County properties is > The average tax_value of Los Angelas County properties.
 * alpha = 0.05
 
-Outcome: To be determined
+Outcome: Rejected the Null Hypothesis.
+
+__Hypothesis 4__
+* $H_0$: The average tax_value of Orange County properties is <= The average tax_value of Los Angelas County properties.
+* $H_a$: The average tax_value of Orange County properties is > The average tax_value of Los Angelas County properties.
+* alpha = 0.05
+
+Outcome: Rejected the Null Hypothesis.
 
 ***
 
@@ -67,6 +77,8 @@ Outcome: To be determined
 
 * All properties are located in California.
 * All properties exist in either Los Angelas, Orange, or Ventura county.
+* The individual county tax rates have been calculated and their distributions plotted at the end of the Wrangle section of this notebook.
+* My best model was a Polynomial model with a degree of 4. After evaluating on the test data set, this model had an RMSE of about $194,208. It also had a variance of about 34%.
 
 ***
 
@@ -87,12 +99,12 @@ Outcome: To be determined
     * Remove outliers
 - [x] Plot individual variable distributions
 - [x] Plot county_tax_rate distributions ( A Project Goal )
-- [ ] Determine at least two initial hypotheses, run the statistical tests needed, evaluate the outcome, and record results.
-- [ ] Split the data sets into X and y groups and scale the X groups before use in the model.
-- [ ] Set baseline using tax_value mean or median.
-- [ ] Create and evaluate model on train and validate sets
-- [ ] Choose best model and evaluate it on test data set
-- [ ] Document conclusions, takeaways, and next steps in the Final Report Notebook.
+- [x] Determine at least two initial hypotheses, run the statistical tests needed, evaluate the outcome, and record results.
+- [x] Split the data sets into X and y groups and scale the X groups before use in the model.
+- [x] Set baseline using tax_value mean or median.
+- [x] Create and evaluate model on train and validate sets
+- [x] Choose best model and evaluate it on test data set
+- [x] Document conclusions, takeaways, and next steps in the Final Report Notebook.
 
 ___
 
